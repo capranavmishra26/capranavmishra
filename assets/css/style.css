@@ -13,7 +13,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -48,11 +48,9 @@ h3 { font-size: 1.1rem; color: var(--navy); }
 
 /* Header */
 .header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-.header__inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-.brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
-.brand__mark { width: 40px; height: 40px; border-radius: 8px; background: var(--navy); color: var(--gold); display: grid; place-items: center; font: 700 1rem "Playfair Display", serif; }
-.brand__text { font-weight: 700; color: var(--navy); display: flex; flex-direction: column; line-height: 1.2; }
-.brand__text small { font-weight: 500; font-size: .74rem; color: var(--muted); }
+.header__inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.brand { display: flex; align-items: center; text-decoration: none; }
+.brand__logo { height: 56px; width: auto; }
 .nav { display: flex; align-items: center; gap: 1.6rem; }
 .nav a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: .95rem; }
 .nav a:hover { color: var(--gold-2); }
@@ -170,7 +168,8 @@ h3 { font-size: 1.1rem; color: var(--navy); }
 }
 @media (max-width: 720px) {
   .nav-toggle { display: block; }
-  .nav { position: absolute; top: 68px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); display: none; }
+  .brand__logo { height: 46px; }
+  .nav { position: absolute; top: 76px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); display: none; }
   .nav.open { display: flex; }
   .nav a { padding: 14px 20px; border-top: 1px solid var(--line); }
   .nav__cta { border-radius: 0; }

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | CA Pranav Mishra</title>
+  <meta name="description" content="Updates and notes on Income Tax, Direct Tax and the Companies Act by CA Pranav Mishra.">
+  <link rel="canonical" href="https://capranavmishra.com/blog/">
+  <meta property="og:title" content="Blog | CA Pranav Mishra">
+  <meta property="og:description" content="Updates and notes on Income Tax, Direct Tax and the Companies Act.">
+  <meta property="og:url" content="https://capranavmishra.com/blog/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://capranavmishra.com/assets/img/share.png">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-root="../">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="../" aria-label="CA Pranav Mishra home">
+        <span class="brand__mark">PM</span>
+        <span class="brand__text">CA Pranav Mishra<small>Chartered Accountant</small></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="../#about">About</a>
+        <a href="../#services">Services</a>
+        <a href="../#apps">Applications</a>
+        <a href="./">Blog</a>
+        <a href="../#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <p class="eyebrow">Blog</p>
+        <h1>Updates &amp; insights</h1>
+        <p class="lead">Notes on Income Tax, Direct Tax and the Companies Act.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:40px">
+      <div class="container">
+        <div class="app-filter" id="post-filter" role="tablist" aria-label="Filter posts by category"></div>
+        <div class="grid grid--3" id="post-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> CA Pranav Mishra. All rights reserved.</p>
+      <p class="footer__small">Information on this website is for general purposes only and is not professional advice. Published in accordance with ICAI guidelines.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/posts.js"></script>
+  <script>
+    (function () {
+      var posts = CPM.sortedPosts();
+      var grid = document.getElementById("post-grid");
+      var filter = document.getElementById("post-filter");
+      var cats = ["All", "Income Tax", "Direct Tax", "Companies Act"];
+      posts.forEach(function (p) { if (cats.indexOf(p.category) === -1) cats.push(p.category); });
+
+      function show(cat) {
+        grid.innerHTML = CPM.postCards(posts.filter(function (p) { return cat === "All" || p.category === cat; }));
+        filter.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-cat") === cat); });
+      }
+      filter.innerHTML = cats.map(function (c) {
+        return '<button role="tab" data-cat="' + CPM.esc(c) + '">' + CPM.esc(c) + "</button>";
+      }).join("");
+      filter.addEventListener("click", function (e) {
+        var cat = e.target.getAttribute("data-cat");
+        if (cat) { show(cat); history.replaceState(null, "", cat === "All" ? "./" : "#" + encodeURIComponent(cat)); }
+      });
+      var initial = decodeURIComponent(location.hash.slice(1));
+      show(cats.indexOf(initial) > -1 ? initial : "All");
+    })();
+  </script>
+</body>
+</html>

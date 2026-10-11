@@ -1,4 +1,4 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -10,6 +10,7 @@
   <meta property="og:description" content="Practising Chartered Accountant. Audit, taxation, GST, accounting and advisory.">
   <meta property="og:url" content="https://capranavmishra.com/">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://capranavmishra.com/assets/img/share.png">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,23 +18,6 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-  <!-- ICAI disclaimer: shown once per visitor before the site is accessible -->
-  <div class="disclaimer" id="disclaimer" role="dialog" aria-modal="true" aria-labelledby="disclaimer-title" hidden>
-    <div class="disclaimer__box">
-      <h2 id="disclaimer-title">Disclaimer</h2>
-      <p>As per the guidelines of the Institute of Chartered Accountants of India (ICAI), Chartered Accountants are not permitted to solicit work or advertise. By clicking <strong>“I Agree”</strong>, you acknowledge that:</p>
-      <ul>
-        <li>You are accessing this website of your own accord, seeking information about CA Pranav Mishra, and there has been no advertisement, solicitation or inducement of any kind.</li>
-        <li>The information on this website is for general informational purposes only and does not constitute professional advice or create a professional relationship.</li>
-        <li>Tools and applications offered here are for convenience only; results should be verified before being relied upon.</li>
-      </ul>
-      <div class="disclaimer__actions">
-        <button class="btn btn--primary" id="disclaimer-agree">I Agree</button>
-        <a class="btn btn--ghost" href="https://www.icai.org" rel="noopener">Leave Site</a>
-      </div>
-    </div>
-  </div>
 
   <header class="header" id="top">
     <div class="container header__inner">
@@ -48,6 +32,7 @@
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#apps">Applications</a>
+        <a href="blog/">Blog</a>
         <a href="#resources">Resources</a>
         <a href="#contact" class="nav__cta">Contact</a>
       </nav>
@@ -145,7 +130,19 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="resources">
+    <section class="section section--alt" id="updates">
+      <div class="container">
+        <p class="eyebrow">Blog</p>
+        <h2>Latest updates</h2>
+        <p class="section__intro">Notes on Income Tax, Direct Tax and the Companies Act.</p>
+        <div class="grid grid--3" id="latest-posts">
+          <!-- Filled from assets/js/posts.js -->
+        </div>
+        <p style="margin-top:1.6rem"><a class="btn btn--ghost" href="blog/">View all posts &rarr;</a></p>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
       <div class="container">
         <p class="eyebrow">Resources</p>
         <h2>Useful links</h2>
@@ -162,13 +159,13 @@
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section section--alt" id="contact">
       <div class="container contact">
         <div>
           <p class="eyebrow">Contact</p>
           <h2>Get in touch</h2>
           <ul class="contact__list">
-            <li><strong>Email</strong><a href="mailto:contact@capranavmishra.com" data-email>contact@capranavmishra.com</a></li>
+            <li><strong>Email</strong><a href="mailto:capranavmishra26@gmail.com" data-email>capranavmishra26@gmail.com</a></li>
             <li><strong>Phone</strong><a href="tel:+910000000000">+91 00000 00000</a></li>
             <li><strong>Office</strong><span>[Office address, City, State, PIN]</span></li>
             <li><strong>Hours</strong><span>Mon–Sat, 10:00 AM – 7:00 PM</span></li>
@@ -193,7 +190,9 @@
     </div>
   </footer>
 
+  <script src="assets/js/site.js"></script>
   <script src="assets/js/apps.js"></script>
+  <script src="assets/js/posts.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

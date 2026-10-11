@@ -8,6 +8,10 @@ Website for CA Pranav Mishra, hosted free on GitHub Pages at your own domain.
 |---|---|
 | `index.html` | Main website (About, Services, Applications, Resources, Contact) |
 | `assets/js/apps.js` | **The list of applications.** Edit this to add or remove apps |
+| `blog/` | Blog posts (one `.html` file per post) and the blog listing page |
+| `blog/_template.html` | Copy this to start a new post |
+| `assets/js/posts.js` | **The list of blog posts.** Add each new post here |
+| `assets/img/share.png` | Image shown when a link is shared on LinkedIn or WhatsApp |
 | `apps/` | Applications hosted on the site itself (GST and EMI calculators included) |
 | `assets/css/style.css` | Colours, fonts and layout |
 | `CNAME` | Tells GitHub Pages to serve the site at `capranavmishra.com` |
@@ -19,7 +23,7 @@ Website for CA Pranav Mishra, hosted free on GitHub Pages at your own domain.
 Open `index.html` and replace the placeholders:
 
 - `[ICAI M. No.]`, `B.Com, FCA / ACA`, `[City, State]` in the About section
-- `contact@capranavmishra.com` (the email the contact form sends to), `+91 00000 00000`, `[Office address...]`
+- `+91 00000 00000` and `[Office address...]` (the email is already set to capranavmishra26@gmail.com, and the contact form sends to it)
 - Photo: save it as `assets/img/pranav.jpg`, then in the About section replace the `<span>PM</span>` with
   `<img src="assets/img/pranav.jpg" alt="CA Pranav Mishra">`
 
@@ -74,6 +78,34 @@ Create a folder such as `apps/income-tax/` with an `index.html`. Copy one of the
 **B. On another service (apps that need a server, database or login: Python, Node, Streamlit and so on)**
 GitHub Pages only serves static files, so host these apps on a platform such as Render, Railway, Vercel, Streamlit Community Cloud or Azure. Put the app's link in `url` with `newTab: true`.
 To give it your own address, such as `app.capranavmishra.com`, add a `CNAME` record in your DNS (Name: `app`, Value: the host name that platform gives you), then add the custom domain in that platform's settings.
+
+## 5. Writing a blog post
+
+1. **Create the post.** In the GitHub repository, open `blog/_template.html`, click the **copy raw file** icon, then go to **Add file → Create new file**. Name it `blog/your-topic-name.html` (lowercase, words joined by hyphens) and paste.
+2. **Fill it in.** Replace every line marked `CHANGE`: title, summary, the file name in the two link lines, category and date. Write your content between `POST CONTENT STARTS` and `POST CONTENT ENDS`, using:
+   - `<p>...</p>` for a paragraph
+   - `<h2>...</h2>` for a heading
+   - `<ul><li>...</li></ul>` for bullet points
+   - `<strong>...</strong>` for bold text
+   - the sample table and quote box from the template
+
+   Then click **Commit changes**.
+3. **List the post.** Open `assets/js/posts.js`, click the pencil icon, and copy the existing entry block (from `{` to `},`) to add yours:
+   ```js
+   {
+     title: "Your post title",
+     date: "2026-10-15",
+     category: "Income Tax",      // "Income Tax" | "Direct Tax" | "Companies Act"
+     summary: "One or two lines about the post.",
+     url: "blog/your-topic-name.html"
+   },
+   ```
+   Click **Commit changes**. The post now appears on the home page under *Latest updates* and on `capranavmishra.com/blog/`.
+4. **Share on LinkedIn.** Open the post on the live site and click the **LinkedIn** button at the bottom, or paste the link into a LinkedIn post: `https://capranavmishra.com/blog/your-topic-name.html`. LinkedIn shows the title, summary and preview image automatically.
+
+You can also share a category link, for example `https://capranavmishra.com/blog/#Companies%20Act`.
+
+If LinkedIn shows an old preview after you edit a post, paste the link into https://www.linkedin.com/post-inspector/ to refresh it.
 
 ## Updating the site later
 

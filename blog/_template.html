@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+  HOW TO WRITE A NEW POST
+  1. Copy this file and rename the copy, using lowercase words joined by hyphens,
+     e.g. "new-tax-regime-faq.html". The file name becomes the link:
+     https://capranavmishra.com/blog/new-tax-regime-faq.html
+  2. Replace everything marked CHANGE below (title, description, file name, date, category).
+  3. Write the post between the "POST CONTENT" markers.
+  4. Add the post to assets/js/posts.js so it appears on the website.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CHANGE: post title -->
+  <title>Post title goes here | CA Pranav Mishra</title>
+  <!-- CHANGE: one-line summary (shown in Google and in the LinkedIn preview) -->
+  <meta name="description" content="One-line summary of the post.">
+  <!-- CHANGE: file name in the next two lines -->
+  <link rel="canonical" href="https://capranavmishra.com/blog/your-file-name.html">
+  <meta property="og:url" content="https://capranavmishra.com/blog/your-file-name.html">
+  <!-- CHANGE: title and summary again, for the LinkedIn preview -->
+  <meta property="og:title" content="Post title goes here">
+  <meta property="og:description" content="One-line summary of the post.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://capranavmishra.com/assets/img/share.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-root="../">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="../" aria-label="CA Pranav Mishra home">
+        <span class="brand__mark">PM</span>
+        <span class="brand__text">CA Pranav Mishra<small>Chartered Accountant</small></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="../#about">About</a>
+        <a href="../#services">Services</a>
+        <a href="../#apps">Applications</a>
+        <a href="./">Blog</a>
+        <a href="../#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="post">
+        <p class="eyebrow"><a href="./" style="color:inherit;text-decoration:none">&larr; All posts</a></p>
+        <!-- CHANGE: post title -->
+        <h1>Post title goes here</h1>
+        <div class="post__meta">
+          <!-- CHANGE: category: Income Tax, Direct Tax or Companies Act -->
+          <span class="badge badge--cat">Income Tax</span>
+          <!-- CHANGE: date (datetime="YYYY-MM-DD", then the date as text) -->
+          <time datetime="2026-10-11">11 Oct 2026</time>
+          <span>By CA Pranav Mishra</span>
+        </div>
+      </div>
+    </section>
+
+    <article class="post">
+      <div class="post__body">
+        <!-- ===== POST CONTENT STARTS ===== -->
+
+        <p>Opening paragraph: what changed and who it affects.</p>
+
+        <h2>Key points</h2>
+        <ul>
+          <li>First point</li>
+          <li>Second point</li>
+        </ul>
+
+        <h2>Example</h2>
+        <table>
+          <tr><th>Particulars</th><th>Amount (₹)</th></tr>
+          <tr><td>Row 1</td><td>0</td></tr>
+        </table>
+
+        <blockquote>Use a quote box for a section reference, notification number or important note.</blockquote>
+
+        <h2>Conclusion</h2>
+        <p>Closing paragraph.</p>
+
+        <!-- ===== POST CONTENT ENDS ===== -->
+        <p class="post__note">This article is for general information only and does not constitute professional advice. Provisions are as understood on the date of publication and may change; please refer to the relevant Act, rules and notifications before acting.</p>
+      </div>
+
+      <div class="share" data-share>
+        <strong>Share:</strong>
+        <a class="btn btn--linkedin" data-share-linkedin target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn--ghost" data-share-whatsapp target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn btn--ghost" type="button" data-share-copy>Copy link</button>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> CA Pranav Mishra. All rights reserved.</p>
+      <p class="footer__small">Information on this website is for general purposes only and is not professional advice. Published in accordance with ICAI guidelines.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

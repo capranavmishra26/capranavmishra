@@ -1,32 +1,6 @@
+/* Home page only: applications grid, latest blog posts, contact form. */
 (function () {
-  // ICAI disclaimer: show until the visitor agrees (remembered in this browser)
-  var KEY = "cpm-disclaimer-agreed";
-  var modal = document.getElementById("disclaimer");
-  var agreed = false;
-  try { agreed = localStorage.getItem(KEY) === "1"; } catch (e) {}
-  if (!agreed && modal) {
-    modal.hidden = false;
-    document.body.classList.add("locked");
-    document.getElementById("disclaimer-agree").addEventListener("click", function () {
-      try { localStorage.setItem(KEY, "1"); } catch (e) {}
-      modal.hidden = true;
-      document.body.classList.remove("locked");
-    });
-  }
-
-  // Mobile navigation
-  var toggle = document.getElementById("nav-toggle");
-  var nav = document.getElementById("nav");
-  toggle.addEventListener("click", function () {
-    var open = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open);
-  });
-  nav.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-  });
+  var esc = CPM.esc;
 
   // Applications
   var apps = window.APPS || [];
@@ -37,12 +11,6 @@
     login: ["badge--login", "Sign-in"],
     soon: ["badge--soon", "Coming soon"]
   };
-
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
 
   function render(category) {
     var list = apps.filter(function (a) { return category === "All" || a.category === category; });
@@ -75,6 +43,9 @@
   }
   render("All");
 
+  // Latest three blog posts
+  document.getElementById("latest-posts").innerHTML = CPM.postCards(CPM.sortedPosts().slice(0, 3));
+
   // Contact form -> opens the visitor's email app
   var form = document.getElementById("contact-form");
   var to = document.querySelector("[data-email]").textContent.trim();
@@ -85,6 +56,4 @@
     window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent("Website enquiry from " + d.get("name")) +
       "&body=" + encodeURIComponent(body);
   });
-
-  document.getElementById("year").textContent = new Date().getFullYear();
 })();

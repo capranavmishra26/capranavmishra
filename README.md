@@ -8,15 +8,17 @@ Website for CA Pranav Mishra, hosted free on GitHub Pages at your own domain.
 |---|---|
 | `index.html` | Main website (About, Services, Applications, Resources, Contact) |
 | `assets/js/apps.js` | **The list of applications.** Edit this to add or remove apps |
-| `blog/` | Blog posts (one `.html` file per post) and the blog listing page |
-| `blog/_template.html` | Copy this to start a new post |
-| `assets/js/posts.js` | **The list of blog posts.** Add each new post here |
+| `_posts/` | **Your blog posts.** One `.md` text file per post |
+| `_drafts/post-template.md` | Copy this to start a new post |
+| `_layouts/post.html` | Design of a blog post page |
+| `_config.yml` | Blog engine settings (no need to edit) |
+| `blog/index.html` | Blog listing page with category filters |
+| `assets/js/posts.js` | Builds the post list automatically (do not edit) |
 | `assets/img/share.png` | Image shown when a link is shared on LinkedIn or WhatsApp |
 | `apps/` | Applications hosted on the site itself (GST and EMI calculators included) |
 | `assets/css/style.css` | Colours, fonts and layout |
 | `CNAME` | Tells GitHub Pages to serve the site at `capranavmishra.com` |
 | `404.html` | Page shown for broken links |
-| `.nojekyll` | Tells GitHub to serve the files as they are |
 
 ## 1. Fill in your details
 
@@ -32,8 +34,8 @@ Open `index.html` and replace the placeholders:
 1. Create a free account at https://github.com, or sign in.
 2. Click **+** → **New repository**. Name it `capranavmishra.com` (any name works), set it to **Public**, then click **Create repository**.
 3. On the empty repository page, click **uploading an existing file**.
-4. Drag **everything inside** the `Website` folder (`index.html`, `404.html`, `CNAME`, `.nojekyll`, `assets`, `apps`) into the browser, then click **Commit changes**.
-   *Windows hides `.nojekyll` by default. In File Explorer, turn on View → Show → Hidden items before dragging.*
+4. Drag **everything inside** the `Website` folder (all files and folders, including `_config.yml`, `_layouts` and `_posts`) into the browser, then click **Commit changes**.
+   *Do not add a `.nojekyll` file. It switches off the blog engine.*
 5. Go to **Settings → Pages**. Under *Build and deployment*, set Source to **Deploy from a branch**, Branch to **main** and the folder to **/ (root)**, then click **Save**.
 6. On the same page, under **Custom domain**, enter `capranavmishra.com` and click **Save**.
 
@@ -81,32 +83,44 @@ To give it your own address, such as `app.capranavmishra.com`, add a `CNAME` rec
 
 ## 5. Writing a blog post
 
-1. **Create the post.** In the GitHub repository, open `blog/_template.html`, click the **copy raw file** icon, then go to **Add file → Create new file**. Name it `blog/your-topic-name.html` (lowercase, words joined by hyphens) and paste.
-2. **Fill it in.** Replace every line marked `CHANGE`: title, summary, the file name in the two link lines, category and date. Write your content between `POST CONTENT STARTS` and `POST CONTENT ENDS`, using:
-   - `<p>...</p>` for a paragraph
-   - `<h2>...</h2>` for a heading
-   - `<ul><li>...</li></ul>` for bullet points
-   - `<strong>...</strong>` for bold text
-   - the sample table and quote box from the template
+Posts are plain text files in the `_posts` folder. GitHub turns each one into a web page and adds it to the blog list and the home page automatically.
 
-   Then click **Commit changes**.
-3. **List the post.** Open `assets/js/posts.js`, click the pencil icon, and copy the existing entry block (from `{` to `},`) to add yours:
-   ```js
-   {
-     title: "Your post title",
-     date: "2026-10-15",
-     category: "Income Tax",      // "Income Tax" | "Direct Tax" | "Companies Act"
-     summary: "One or two lines about the post.",
-     url: "blog/your-topic-name.html"
-   },
+1. In your GitHub repository, open the `_posts` folder and click **Add file → Create new file**.
+2. Name the file `YYYY-MM-DD-short-title.md`, using the publication date, lowercase words and hyphens. For example:
+   `2026-10-15-tds-rate-changes.md`
+   The part after the date becomes the link: `capranavmishra.com/blog/tds-rate-changes/`
+3. Paste this at the top and fill in the three lines. Keep the `---` lines and the quote marks.
    ```
-   Click **Commit changes**. The post now appears on the home page under *Latest updates* and on `capranavmishra.com/blog/`.
-4. **Share on LinkedIn.** Open the post on the live site and click the **LinkedIn** button at the bottom, or paste the link into a LinkedIn post: `https://capranavmishra.com/blog/your-topic-name.html`. LinkedIn shows the title, summary and preview image automatically.
+   ---
+   title: "TDS rate changes from 1 October"
+   category: Income Tax
+   summary: "One or two lines shown on the blog list and in the LinkedIn preview."
+   ---
+   ```
+   `category` must be one of: `Income Tax`, `Direct Tax`, `Companies Act`.
+4. Below the second `---`, leave an empty line and **paste your article**. Leave an empty line between paragraphs. Optional formatting:
+
+   | Type this | You get |
+   |---|---|
+   | `## Heading` | A heading |
+   | `- point` | A bullet point |
+   | `1. point` | A numbered point |
+   | `**text**` | **Bold** |
+   | `> note` | A highlighted note box |
+   | `[ICAI](https://www.icai.org)` | A link |
+
+   For tables, see the example in `_drafts/post-template.md`. The **Preview** tab in the GitHub editor shows how the post will look.
+5. Click **Commit changes**. The post goes live in 1 to 2 minutes. Check progress on the repository's **Actions** tab.
+
+**Sharing on LinkedIn:** open the post on the website and click the **LinkedIn** button at the bottom, or paste the link into a LinkedIn post. LinkedIn shows the title, summary and preview image automatically. If LinkedIn shows an old preview after you edit a post, paste the link into https://www.linkedin.com/post-inspector/ to refresh it.
 
 You can also share a category link, for example `https://capranavmishra.com/blog/#Companies%20Act`.
 
-If LinkedIn shows an old preview after you edit a post, paste the link into https://www.linkedin.com/post-inspector/ to refresh it.
+**Editing or deleting a post:** open the file in `_posts`, then click the pencil icon to edit or the **⋯** menu to delete.
 
+**Notes**
+- A post dated in the future is published only when that date arrives and the site is next updated.
+- Blog posts appear only on the live site, not when you open `index.html` from your computer.
 ## Updating the site later
 
 In the GitHub repository, open any file, click the pencil icon, edit it and click **Commit changes**. You can also drag in replacement files with **Add file → Upload files**. The live site updates within about a minute.

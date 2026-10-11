@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} | CA Pranav Mishra</title>
+  {% assign summary = page.summary | default: page.excerpt | strip_html | strip_newlines | truncate: 200 %}
+  <meta name="description" content="{{ summary | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ summary | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="{{ page.image | default: '/assets/img/share.png' | absolute_url }}">
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta name="author" content="CA Pranav Mishra">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body data-root="/">
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="/" aria-label="CA Pranav Mishra home">
+        <span class="brand__mark">PM</span>
+        <span class="brand__text">CA Pranav Mishra<small>Chartered Accountant</small></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/#about">About</a>
+        <a href="/#services">Services</a>
+        <a href="/#apps">Applications</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="post">
+        <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">&larr; All posts</a></p>
+        <h1>{{ page.title }}</h1>
+        <div class="post__meta">
+          <span class="badge badge--cat">{{ page.category | default: "Updates" }}</span>
+          <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %b %Y" }}</time>
+          <span>By CA Pranav Mishra</span>
+        </div>
+      </div>
+    </section>
+
+    <article class="post">
+      <div class="post__body">
+        {{ content }}
+        <p class="post__note">This article is for general information only and does not constitute professional advice. Provisions are as understood on the date of publication and may change; please refer to the relevant Act, rules and notifications before acting.</p>
+      </div>
+
+      <div class="share" data-share>
+        <strong>Share:</strong>
+        <a class="btn btn--linkedin" data-share-linkedin target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn--ghost" data-share-whatsapp target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn btn--ghost" type="button" data-share-copy>Copy link</button>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> CA Pranav Mishra. All rights reserved.</p>
+      <p class="footer__small">Information on this website is for general purposes only and is not professional advice. Published in accordance with ICAI guidelines.</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>

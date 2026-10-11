@@ -1,0 +1,13 @@
+# Settings for GitHub Pages' built-in blog engine (Jekyll). No need to edit.
+title: CA Pranav Mishra
+url: https://capranavmishra.com
+timezone: Asia/Kolkata
+permalink: /blog/:title/
+markdown: kramdown
+exclude:
+  - README.md
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: post

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GST Calculator | CA Pranav Mishra</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/app.css">
+</head>
+<body>
+  <main class="app-shell">
+    <a class="app-back" href="../../#apps">&larr; Back to Applications</a>
+    <h1>GST Calculator</h1>
+    <div class="app-panel">
+      <div class="toggle" role="group" aria-label="Calculation mode">
+        <button type="button" data-mode="add" aria-pressed="true">Add GST</button>
+        <button type="button" data-mode="remove" aria-pressed="false">Remove GST</button>
+      </div>
+      <div class="fields">
+        <label><span id="amount-label">Amount (excluding GST) ₹</span><input id="amount" type="number" min="0" step="0.01" value="10000" inputmode="decimal"></label>
+        <label>GST rate
+          <select id="rate">
+            <option value="0">0%</option>
+            <option value="3">3%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+            <option value="40">40%</option>
+          </select>
+        </label>
+        <label>Supply type
+          <select id="supply">
+            <option value="intra">Intra-state (CGST + SGST)</option>
+            <option value="inter">Inter-state (IGST)</option>
+          </select>
+        </label>
+        <label>Custom rate % (optional)<input id="custom" type="number" min="0" step="0.01" placeholder="Overrides selection"></label>
+      </div>
+      <div class="results" id="results"></div>
+      <p class="app-note">For general guidance only. Confirm the applicable rate for your goods or services before relying on the result.</p>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var mode = "add";
+      var $ = function (id) { return document.getElementById(id); };
+      var inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 2 });
+
+      function calc() {
+        var amount = parseFloat($("amount").value) || 0;
+        var rate = $("custom").value !== "" ? parseFloat($("custom").value) || 0 : parseFloat($("rate").value);
+        var net, tax;
+        if (mode === "add") { net = amount; tax = amount * rate / 100; }
+        else { net = amount * 100 / (100 + rate); tax = amount - net; }
+        var gross = net + tax;
+        var rows = [["Taxable value", net], ["Total GST @ " + rate + "%", tax]];
+        if ($("supply").value === "intra") {
+          rows.push(["CGST @ " + rate / 2 + "%", tax / 2], ["SGST @ " + rate / 2 + "%", tax / 2]);
+        } else {
+          rows.push(["IGST @ " + rate + "%", tax]);
+        }
+        $("results").innerHTML = rows.map(function (r) {
+          return '<div class="result"><span>' + r[0] + "</span><strong>" + inr.format(r[1]) + "</strong></div>";
+        }).join("") + '<div class="result result--main"><span>Total amount</span><strong>' + inr.format(gross) + "</strong></div>";
+      }
+
+      document.querySelectorAll("[data-mode]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          mode = b.getAttribute("data-mode");
+          document.querySelectorAll("[data-mode]").forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+          $("amount-label").textContent = mode === "add" ? "Amount (excluding GST) ₹" : "Amount (including GST) ₹";
+          calc();
+        });
+      });
+      ["amount", "rate", "supply", "custom"].forEach(function (id) { $(id).addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>

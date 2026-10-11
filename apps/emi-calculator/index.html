@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMI Calculator | CA Pranav Mishra</title>
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/app.css">
+</head>
+<body>
+  <main class="app-shell">
+    <a class="app-back" href="../../#apps">&larr; Back to Applications</a>
+    <h1>EMI Calculator</h1>
+    <div class="app-panel">
+      <div class="fields">
+        <label>Loan amount ₹<input id="principal" type="number" min="0" step="1000" value="2500000" inputmode="decimal"></label>
+        <label>Interest rate (% per annum)<input id="rate" type="number" min="0" step="0.05" value="8.5" inputmode="decimal"></label>
+        <label>Tenure (years)<input id="years" type="number" min="0" step="1" value="20" inputmode="numeric"></label>
+        <label>Additional months<input id="months" type="number" min="0" max="11" step="1" value="0" inputmode="numeric"></label>
+      </div>
+      <div class="results" id="results"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Closing balance</th></tr></thead>
+          <tbody id="schedule"></tbody>
+        </table>
+      </div>
+      <p class="app-note">Indicative figures assuming a fixed rate and monthly reducing balance. Actual EMI may differ based on lender terms.</p>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
+
+      function calc() {
+        var P = parseFloat($("principal").value) || 0;
+        var r = (parseFloat($("rate").value) || 0) / 12 / 100;
+        var n = (parseInt($("years").value, 10) || 0) * 12 + (parseInt($("months").value, 10) || 0);
+        if (P <= 0 || n <= 0) { $("results").innerHTML = ""; $("schedule").innerHTML = ""; return; }
+        var emi = r === 0 ? P / n : P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+
+        var bal = P, rows = [], yp = 0, yi = 0;
+        for (var m = 1; m <= n; m++) {
+          var interest = bal * r, princ = emi - interest;
+          bal = Math.max(bal - princ, 0); yp += princ; yi += interest;
+          if (m % 12 === 0 || m === n) {
+            rows.push("<tr><td>" + Math.ceil(m / 12) + "</td><td>" + inr.format(yp) + "</td><td>" + inr.format(yi) + "</td><td>" + inr.format(bal) + "</td></tr>");
+            yp = 0; yi = 0;
+          }
+        }
+        var total = emi * n;
+        $("results").innerHTML =
+          '<div class="result result--main"><span>Monthly EMI</span><strong>' + inr.format(emi) + "</strong></div>" +
+          '<div class="result"><span>Total interest</span><strong>' + inr.format(total - P) + "</strong></div>" +
+          '<div class="result"><span>Total payment</span><strong>' + inr.format(total) + "</strong></div>";
+        $("schedule").innerHTML = rows.join("");
+      }
+
+      ["principal", "rate", "years", "months"].forEach(function (id) { $(id).addEventListener("input", calc); });
+      calc();
+    })();
+  </script>
+</body>
+</html>
